@@ -19,9 +19,9 @@ export const cookieSetter = (res, token, set) => {
     "Set-Cookie",
     serialize("access_token", set ? token : "", {
       httpOnly: true,
-      sameSite: "lax",
-      // secure: true, //for deployment
-      // sameSite: "none", //for deployment
+      // sameSite: "lax",
+      secure: true, //for deployment
+      sameSite: "none", //for deployment
       path: "/",
       maxAge: set ? 15 * 24 * 60 * 60 * 1000 : 0,
     })
