@@ -37,7 +37,7 @@ const Page = () => {
     }
   };
 
-  if (user._id) return redirect("/login");
+  if (user._id) return redirect("/");
 
   return (
     <div className="login">

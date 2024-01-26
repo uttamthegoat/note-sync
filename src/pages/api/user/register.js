@@ -2,6 +2,7 @@ const { connectDB } = require("@/utils/feature");
 import { User } from "@/models/user";
 import CustomError from "@/utils/CustomError";
 import asyncHandler from "@/utils/asyncHandler";
+import generateToken from "@/utils/generateToken";
 
 const handler = asyncHandler(async (req, res) => {
   if (req.method !== "POST")
@@ -22,9 +23,12 @@ const handler = asyncHandler(async (req, res) => {
   });
 
   await newUser.save();
-  console.log("User created successfully");
 
-  res.status(200).json({ message: "user created" });
+  generateToken(res, newUser._id);
+
+  res
+    .status(200)
+    .json({ success: true, message: "user created", user: newUser });
 });
 
 export default handler;
