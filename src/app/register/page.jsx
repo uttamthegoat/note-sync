@@ -16,7 +16,7 @@ const Page = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
