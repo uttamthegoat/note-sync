@@ -1,23 +1,19 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "@/components/navbar";
-import ContextProvider from "@/components/clients/Provider";
-
-const inter = Inter({ subsets: ["latin"] });
+import "../styles/app.scss";
+import Header from "./header";
+import { ContextProvider } from "../components/Clients";
 
 export const metadata = {
   title: "Todo App",
-  description: "This is a todo app project.",
+  description: "This is a Todo App Project made for Next.js series",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ContextProvider>
           <>
-            <Navbar />
+            <Header />
             {children}
           </>
         </ContextProvider>

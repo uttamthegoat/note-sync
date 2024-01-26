@@ -1,4 +1,4 @@
-import { checkAuth, connectDB } from "../../utils/feature";
+import { checkAuth, checkAuthForTasks, connectDB } from "../../utils/feature";
 import { Task } from "../../models/task";
 import asyncHandler from "@/utils/asyncHandler";
 import CustomError from "@/utils/CustomError";
@@ -8,8 +8,7 @@ const handler = asyncHandler(async (req, res) => {
     throw new CustomError(400, "Only GET Method is allowed");
   await connectDB();
 
-  const user = await checkAuth(req);
-
+  const user = await checkAuthForTasks(req);
   if (!user) throw new CustomError(401, "Login First");
 
   const mytasks = await Task.find({ user: user._id });

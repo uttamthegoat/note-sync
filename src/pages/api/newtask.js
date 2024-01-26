@@ -14,6 +14,8 @@ const handler = asyncHandler(async (req, res) => {
     throw new CustomError(400, "Please Enter All fields");
 
   const user = await checkAuth(req);
+  
+  
 
   if (!user) throw new CustomError(401, "Login First");
 

@@ -1,21 +1,17 @@
-import TodoForm from "@/components/clients/TodoForm";
-import TodoInfo from "@/components/servers/TodoInfo";
+import React, { Suspense } from "react";
+import Form from "./addTodoForm";
+import Todos from "./todos";
 
-export default function Home() {
+const Page = async () => {
   return (
-    <main className="container my-4">
-      <>
-        <TodoForm />
-      </>
-      {/* todo list */}
-      <section>
-        <TodoInfo
-          title={"day 1"}
-          description={"kill everyone"}
-          id={3}
-          completed={true}
-        />
-      </section>
-    </main>
+    <div className="container">
+      <Form />
+
+      <Suspense fallback={<div>loading...</div>}>
+        <Todos />
+      </Suspense>
+    </div>
   );
-}
+};
+
+export default Page;

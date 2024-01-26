@@ -6,7 +6,6 @@ import CustomError from "./CustomError";
 export const connectDB = async () => {
   try {
     const mongoUri = process.env.MONGO_URI;
-    console.log(mongoUri);
     await mongoose.connect(mongoUri);
     console.log("Connected to MongoDB");
   } catch (error) {
@@ -15,13 +14,23 @@ export const connectDB = async () => {
 };
 
 export const checkAuth = async (req) => {
+  const token = req.cookies.access_token;
+  if (!token)
+    throw new CustomError(400, "Session Expired! Please Login Again!");
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  return await User.findById(decoded.userId).select("-password");
+};
+
+export const checkAuthForTasks = async (req) => {
   const cookie = req.headers.cookie;
   if (!cookie)
     throw new CustomError(400, "Session Expired! Please Login Again!");
 
   const token = cookie.split("=")[1];
-
+  
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  return await User.findById(decoded.userId).select("-password");
+  return await User.findById(decoded.userId);
 };

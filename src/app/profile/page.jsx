@@ -1,9 +1,20 @@
-import React from 'react'
+"use client";
 
-const page = () => {
+import React, { useContext } from "react";
+import { Context } from "../../components/Clients";
+import { redirect } from "next/navigation";
+
+const Page = () => {
+  const { user } = useContext(Context);
+
+  if (!user._id) return redirect("/login");
+
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+};
 
-export default page
+export default Page;

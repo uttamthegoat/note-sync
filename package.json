@@ -18,7 +18,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.69.5"
+    "react-hot-toast": "^2.4.1",
+    "sass": "^1.70.0"
   },
   "devDependencies": {
     "eslint": "^8",
