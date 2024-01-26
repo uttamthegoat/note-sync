@@ -5,10 +5,10 @@ import asyncHandler from "@/utils/asyncHandler";
 import generateToken from "@/utils/generateToken";
 
 const handler = asyncHandler(async (req, res) => {
-  await connectDB();
-
   if (req.method !== "POST")
-    throw new CustomError(400, "Only post method to be applied!");
+  throw new CustomError(400, "Only post method to be applied!");
+  
+await connectDB();
 
   const { email, password } = req.body;
 

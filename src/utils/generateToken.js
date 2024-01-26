@@ -8,16 +8,7 @@ const generateToken = (res, userId) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
-
-  // res.cookie("access_token", token, {
-  //   httpOnly: true,
-  //   sameSite: "lax",
-  //   // secure: true, //for deployment
-  //   // sameSite: "none", //for deployment
-  //   path: "/",
-  //   expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-  // });
-
+  
   cookieSetter(res, token, true);
 };
 
@@ -32,9 +23,7 @@ export const cookieSetter = (res, token, set) => {
       // secure: true, //for deployment
       // sameSite: "none", //for deployment
       path: "/",
-      expires: set
-        ? new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-        : new Date(0),
+      maxAge: set ? 15 * 24 * 60 * 60 * 1000 : 0,
     })
   );
 };
